@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>247</string>
+	<string>247.1</string>
 	<key>AMApplicationVersion</key>
-	<string>2.1</string>
+	<string>2.1.1</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -161,7 +161,7 @@ end run</string>
 					<key>COMMAND_STRING</key>
 					<string>for f in "$@"
 do
-	/usr/local/bin/uncrustify --no-backup "$f"
+	uncrustify --no-backup "$f"
 done</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
@@ -291,7 +291,7 @@ done</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>7DC692BA-6F11-427B-A0B4-F6A4A7BAEADB</key>
+		<key>6FB00ACD-D2B5-400E-848F-3A30E8F4C282</key>
 		<dict>
 			<key>from</key>
 			<string>AA974E29-08D2-4934-9220-5E375B0D3CDC - AA974E29-08D2-4934-9220-5E375B0D3CDC</string>
