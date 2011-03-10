@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>247</string>
+	<string>247.1</string>
 	<key>AMApplicationVersion</key>
-	<string>2.1</string>
+	<string>2.1.1</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -161,7 +161,7 @@ end run</string>
 					<key>COMMAND_STRING</key>
 					<string>for f in "$@"
 do
-	/usr/local/bin/uncrustify --no-backup "$f"
+	uncrustify --no-backup "$f"
 done</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
