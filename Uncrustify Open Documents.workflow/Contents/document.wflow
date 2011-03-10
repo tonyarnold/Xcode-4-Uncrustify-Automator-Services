@@ -161,7 +161,7 @@ end run</string>
 					<key>COMMAND_STRING</key>
 					<string>for f in "$@"
 do
-	uncrustify --no-backup "$f"
+	uncrustify -l OC -q --replace --no-backup "$f"
 done</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
