@@ -61,7 +61,7 @@
 					<key>inputMethod</key>
 					<integer>0</integer>
 					<key>shell</key>
-					<string>/bin/sh</string>
+					<string>/bin/bash</string>
 					<key>source</key>
 					<string></string>
 				</dict>
