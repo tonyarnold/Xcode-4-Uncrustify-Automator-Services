@@ -259,7 +259,7 @@
 		<key>serviceApplicationBundleID</key>
 		<string>com.apple.dt.Xcode</string>
 		<key>serviceApplicationPath</key>
-		<string>/Xcode4/Applications/Xcode.app</string>
+		<string>/Developer/Applications/Xcode.app</string>
 		<key>serviceInputTypeIdentifier</key>
 		<string>com.apple.Automator.text</string>
 		<key>serviceOutputTypeIdentifier</key>
