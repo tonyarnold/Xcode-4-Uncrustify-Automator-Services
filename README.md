@@ -1,9 +1,9 @@
 # Uncrustify Automator Services for Xcode 4 developer preview #
 
-- Version: 0.1
-- Date: Saturday, 24 July 2010
+- Version: 0.3
+- Date: Wednesday, 13 April 2011
 - Author: Tony Arnold, tony@thecocoabots.com
-- Requirements: Xcode 4 developer preview 2, Mac OS X 10.6.4
+- Requirements: Xcode 4.0 or higher, Mac OS X 10.6 or higher
 
 ## What's it do? ##
 
@@ -19,7 +19,7 @@ Copy or move the included workflow files into `~/Library/Services/`.
 
 ### A note of caution ###
 
-Uncrustify will write over your source files with it's changes without asking you if you choose to operate on an entire document. If you want to see what changes will be made without writing over your files, select all the code in your current Objective-C file and use the "*Uncrustify Selected Text*" service.
+Uncrustify will write over your source files with it's changes without asking you if you choose to operate on an entire document. If you want to see what changes will be made without writing over your files, select all the code in your current Objective-C file and use the "*Uncrustify Selected Source Code*" service.
 
 ### How to ###
 
@@ -30,4 +30,4 @@ Xcode will ask you if you want to revert to the file on disk - selecting "*Rever
 
 ## Copyright ##
 
-Copyright 2010 Tony Arnold. See LICENSE for details.
+Copyright 2010—2011 Tony Arnold. See LICENSE for details.
