@@ -55,7 +55,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>/usr/local/bin/uncrustify -l OC -c ~/.uncrustify.cfg </string>
+					<string>/usr/bin/env uncrustify -l OC -c ~/.uncrustify.cfg </string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>

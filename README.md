@@ -1,7 +1,7 @@
-# Uncrustify Automator Services for Xcode 4 developer preview #
+# Uncrustify Automator Services for Xcode 4 #
 
-- Version: 0.3
-- Date: Wednesday, 13 April 2011
+- Version: 0.4
+- Date: Thursday, 14 April 2011
 - Author: Tony Arnold, tony@thecocoabots.com
 - Requirements: Xcode 4.0 or higher, Mac OS X 10.6 or higher
 
