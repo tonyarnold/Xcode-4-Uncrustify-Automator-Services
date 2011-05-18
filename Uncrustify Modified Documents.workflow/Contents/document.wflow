@@ -47,14 +47,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>tell application id "com.apple.dt.Xcode"
-	repeat with current_document in (source documents whose modified is true)
-		set current_document_path to path of current_document
-		set raw_source to text of current_document
-		set formatted_source to do shell script "uncrustify -l OC -q -f " &amp; current_document_path
-		set text of current_document to formatted_source
-	end repeat
-end tell</string>
+					<string>tell application id "com.apple.dt.Xcode"	repeat with current_document in (source documents whose modified is true)		set current_document_path to path of current_document		set raw_source to text of current_document		set formatted_source to do shell script "/opt/local/bin/uncrustify -f  \"" &amp; current_document_path &amp; "\""		set text of current_document to formatted_source	end repeatend tell</string>
 				</dict>
 				<key>Application</key>
 				<array>
@@ -63,7 +56,7 @@ end tell</string>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
 				<key>CFBundleVersion</key>
-				<string>1.0</string>
+				<string>1.0.1</string>
 				<key>CanShowSelectedItemsWhenRun</key>
 				<false/>
 				<key>CanShowWhenRun</key>
