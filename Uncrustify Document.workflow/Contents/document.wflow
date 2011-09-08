@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>247.1</string>
+	<string>330</string>
 	<key>AMApplicationVersion</key>
-	<string>2.1.1</string>
+	<string>2.2.1</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -25,7 +25,11 @@
 					</array>
 				</dict>
 				<key>AMActionVersion</key>
-				<string>1.0</string>
+				<string>1.0.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
 				<key>AMParameterProperties</key>
 				<dict>
 					<key>source</key>
@@ -47,12 +51,8 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>tell application id "com.apple.dt.Xcode"	repeat with current_document in (source documents whose modified is true)		set current_document_path to path of current_document		set raw_source to text of current_document		set formatted_source to do shell script "/opt/local/bin/uncrustify -f  \"" &amp; current_document_path &amp; "\""		set text of current_document to formatted_source	end repeatend tell</string>
+					<string>tell application id "com.apple.dt.Xcode"	set current_document to text document 1 whose name ends with (word -1 of (get name of window 1))	set current_document_path to path of current_document	set raw_source to text of current_document	set formatted_source to do shell script "/usr/local/bin/uncrustify -f \"" &amp; current_document_path &amp; "\""	set text of current_document to formatted_sourceend tell</string>
 				</dict>
-				<key>Application</key>
-				<array>
-					<string>Automator</string>
-				</array>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
 				<key>CFBundleVersion</key>
@@ -107,7 +107,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>508.000000:573.000000</string>
+				<string>309.500000:554.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -199,6 +199,8 @@ end run</string>
 		<string>com.apple.Automator.nothing</string>
 		<key>serviceOutputTypeIdentifier</key>
 		<string>com.apple.Automator.nothing</string>
+		<key>serviceProcessesInput</key>
+		<integer>0</integer>
 		<key>workflowTypeIdentifier</key>
 		<string>com.apple.Automator.servicesMenu</string>
 	</dict>

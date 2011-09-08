@@ -8,14 +8,14 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Uncrustify Modified Documents</string>
+				<string>Uncrustify Document</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>runWorkflowAsService</string>
 			<key>NSRequiredContext</key>
 			<dict>
 				<key>NSApplicationIdentifier</key>
-				<string>com.apple.Xcode</string>
+				<string>com.apple.dt.Xcode</string>
 			</dict>
 		</dict>
 	</array>
