@@ -16,7 +16,9 @@ I will assume you have a basic understanding of installing software using a pack
  1. Install **uncrustify**. I use [Homebrew][hb] to do this — `brew install uncrustify` — but you could just as easily do it by hand, or ;
  2. Make sure that **uncrustify** is in your `$PATH` — you can verify this by opening a new terminal window and typing `which uncrustify` — if the full path to your copy of **uncrustify** is printed, you're set;
  3. Copy or move the included workflow files into `~/Library/Services/`.
- 4. Open the ""*Uncrustify Selected Source Code.workflow*" document, and update the "*Run Shell Script*" block to reflect the path to your copy of uncrustify. It should look something like:
+ 4. Open the "*Uncrustify Document*" using Automator, and update the line beginning with `set formatted_source` in the "*Run AppleScript*" block to reflect the path to your copy of uncrustify. It should look something like:
+    `set formatted_source to do shell script "/usr/local/bin/uncrustify -f \"" & current_document_path & "\""`
+ 4. Open the "*Uncrustify Selected Source Code.workflow*" documents in Automator, and update the "*Run Shell Script*" block to reflect the path to your copy of uncrustify. It should look something like:
     `/usr/local/bin/uncrustify -l OC -c ~/.uncrustify.cfg | cat`
 
 ## How do I use it? ##
@@ -27,12 +29,14 @@ Uncrustify will write over your source files with it's changes without asking yo
 
 The "*Uncrustify Selected Source Code*" will only work with Objective-C documents due to the presence of the `-l OC` argument in the workflow script.
 
+The "*Uncrustify Document*" service will first save any changes you've made to the frontmost source document, and then run it through uncrustify. This service should work on any source code document (not just Objective-C documents).
+
 ### How to ###
 
 1. Open a document (or multiple documents), or select text in an already open document;
 2. Go to the **Xcode** menu, then select *Services* and make your choice from the scripts starting with "*Uncrustify...*".
 
-Xcode will ask you if you want to revert to the file on disk - selecting "*Revert*" will show the changes `uncrustify` has made. 
+Your file's contents will be updated immediately.
 
 ## Copyright ##
 
