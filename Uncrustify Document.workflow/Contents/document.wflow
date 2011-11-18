@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>tell application id "com.apple.dt.Xcode"	set current_document to source document 1 whose name ends with (word -1 of (get name of window 1))	save current_document	set current_document_path to path of current_document	set raw_source to text of current_document	set formatted_source to do shell script "/usr/local/bin/uncrustify -f \"" &amp; current_document_path &amp; "\""	set text of current_document to formatted_sourceend tell</string>
+					<string>tell application id "com.apple.dt.Xcode"	set current_document to text document 1 whose name ends with (word -1 of (get name of window 1))	save current_document	set current_document_path to path of current_document	set raw_source to text of current_document	set formatted_source to do shell script "/usr/local/bin/uncrustify -c ~/.uncrustify.cfg -l OC -f " &amp; quoted form of current_document_path	set text of current_document to formatted_sourceend tell</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -107,7 +107,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>420.000000:754.000000</string>
+				<string>309.500000:554.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
