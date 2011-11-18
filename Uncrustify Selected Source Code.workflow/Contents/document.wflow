@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>329</string>
+	<string>330</string>
 	<key>AMApplicationVersion</key>
-	<string>2.2</string>
+	<string>2.2.1</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -59,7 +59,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>/usr/local/bin/uncrustify -l OC -c ~/.uncrustify.cfg | cat</string>
+					<string>/usr/local/bin/uncrustify --frag -c ~/.uncrustify.cfg -l OC | cat</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
