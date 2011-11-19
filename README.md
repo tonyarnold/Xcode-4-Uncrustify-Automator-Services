@@ -17,9 +17,10 @@ I will assume you have a basic understanding of installing software using a pack
  2. Make sure that **uncrustify** is in your `$PATH` — you can verify this by opening a new terminal window and typing `which uncrustify` — if the full path to your copy of **uncrustify** is printed, you're set;
  3. Copy or move the included workflow files into `~/Library/Services/`.
  4. Open the "*Uncrustify Document*" using Automator, and update the line beginning with `set formatted_source` in the "*Run AppleScript*" block to reflect the path to your copy of uncrustify. It should look something like:
-    `set formatted_source to do shell script "/usr/local/bin/uncrustify -f \"" & current_document_path & "\""`
+    `set formatted_source to do shell script "/usr/local/bin/uncrustify -c ~/.uncrustify.cfg -l OC -f " & quoted form of current_document_path`
+ 5. Do the same for the "*Uncrustify Document and Re-Indent*" automator workflow
  4. Open the "*Uncrustify Selected Source Code.workflow*" documents in Automator, and update the "*Run Shell Script*" block to reflect the path to your copy of uncrustify. It should look something like:
-    `/usr/local/bin/uncrustify -l OC -c ~/.uncrustify.cfg | cat`
+    `/usr/local/bin/uncrustify --frag -c ~/.uncrustify.cfg -l OC | cat`
 
 ## How do I use it? ##
 
@@ -29,7 +30,10 @@ Uncrustify will write over your source files with it's changes without asking yo
 
 The "*Uncrustify Selected Source Code*" will only work with Objective-C documents due to the presence of the `-l OC` argument in the workflow script.
 
-The "*Uncrustify Document*" service will first save any changes you've made to the frontmost source document, and then run it through uncrustify. This service should work on any source code document (not just Objective-C documents).
+The "*Uncrustify Document*" service will first save any changes you've made to the frontmost source document, and then run it through uncrustify. It will also only work with Objective-C source code documents.
+
+The "*Uncrustify Document and Re-Indent*" service will first do the same thing as the "*Uncrustify Document*" service, but will then use Xcode's own "*Re-Indent*" function, which should mean that your final document format's indenting will match Xcode's editing style. It will also only work with Objective-C source code documents.
+
 
 ### How to ###
 
