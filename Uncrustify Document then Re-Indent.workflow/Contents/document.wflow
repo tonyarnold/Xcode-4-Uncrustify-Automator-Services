@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>339.2</string>
+	<string>346</string>
 	<key>AMApplicationVersion</key>
-	<string>2.2.4</string>
+	<string>2.3</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -25,7 +25,7 @@
 					</array>
 				</dict>
 				<key>AMActionVersion</key>
-				<string>1.0.1</string>
+				<string>1.0.2</string>
 				<key>AMApplication</key>
 				<array>
 					<string>Automator</string>
@@ -51,12 +51,12 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on menu_click(mList)	local appName, topMenu, r		-- Validate our input	if mList's length &lt; 3 then error "Menu list is not long enough"		-- Set these variables for clarity and brevity later on	set {appName, topMenu} to (items 1 through 2 of mList)	set r to (items 3 through (mList's length) of mList)		-- This overly-long line calls the menu_recurse function with	-- two arguments: r, and a reference to the top-level menu	tell application "System Events" to my menu_click_recurse(r, ((process appName)'s ¬		(menu bar 1)'s (menu bar item topMenu)'s (menu topMenu)))end menu_clickon menu_click_recurse(mList, parentObject)	local f, r		-- `f` = first item, `r` = rest of items	set f to item 1 of mList	if mList's length &gt; 1 then set r to (items 2 through (mList's length) of mList)		-- either actually click the menu item, or recurse again	tell application "System Events"		if mList's length is 1 then			click parentObject's menu item f		else			my menu_click_recurse(r, (parentObject's (menu item f)'s (menu f)))		end if	end tellend menu_click_recurseglobal current_documentglobal current_text_selection-- Get the currently frontmost source code document, and run uncrustify on it but rather than replacing the document, capture the formatted source and use AppleScript to update the document's contents before savingtell application "Xcode"	set current_document to last source document	set current_document_path to path of current_document	set raw_source to quoted form of (text of current_document as Unicode text)	set formatted_source to do shell script "echo " &amp; raw_source &amp; " | /usr/local/bin/uncrustify -l OC -q -c ~/.uncrustify.cfg"	set text of current_document to formatted_sourceend tell-- I wish there were a better way to do this, but Xcode's indenting is much better than uncrustify's for Objective-C source codetell application "Xcode" to activatemenu_click({"Xcode", "Edit", "Select All"})menu_click({"Xcode", "Editor", "Structure", "Re-Indent"})tell application "Xcode" to save current_document-- Deselect all texttell application "System Events" to keystroke (key code 126)</string>
+					<string>-- In case of multiple Xcode installs, be sure to use the active oneset current_application_path to path to frontmost application as texton menu_click(mList)	local appName, topMenu, r		-- Validate our input	if mList's length &lt; 3 then error "Menu list is not long enough"		-- Set these variables for clarity and brevity later on	set {appName, topMenu} to (items 1 through 2 of mList)	set r to (items 3 through (mList's length) of mList)		-- This overly-long line calls the menu_recurse function with	-- two arguments: r, and a reference to the top-level menu	tell application "System Events" to my menu_click_recurse(r, ((process appName)'s ¬		(menu bar 1)'s (menu bar item topMenu)'s (menu topMenu)))end menu_clickon menu_click_recurse(mList, parentObject)	local f, r		-- `f` = first item, `r` = rest of items	set f to item 1 of mList	if mList's length &gt; 1 then set r to (items 2 through (mList's length) of mList)		-- either actually click the menu item, or recurse again	tell application "System Events"		if mList's length is 1 then			click parentObject's menu item f		else			my menu_click_recurse(r, (parentObject's (menu item f)'s (menu f)))		end if	end tellend menu_click_recurseglobal current_documentglobal current_text_selection-- Get the currently frontmost source code document, and run uncrustify on it but rather than replacing the document, capture the formatted source and use AppleScript to update the document's contents before savingusing terms from application "Xcode"	tell application current_application_path		-- Ugly but otherwise we could get a document from the wrong window		set current_document to text document 1 whose name ends with (word -1 of (get name of window 1))		set raw_source to quoted form of (text of current_document as Unicode text)		set formatted_source to do shell script "echo " &amp; raw_source &amp; " | /usr/local/bin/uncrustify -l OC -q -c ~/.uncrustify.cfg"		set text of current_document to formatted_source	end tell		-- I wish there were a better way to do this, but Xcode's indenting is much better than uncrustify's for Objective-C source code	tell application current_application_path to activate	menu_click({"Xcode", "Edit", "Select All"})	menu_click({"Xcode", "Editor", "Structure", "Re-Indent"})	tell application current_application_path to save current_documentend using terms from-- Deselect all texttell application "System Events" to keystroke (key code 126)</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
 				<key>CFBundleVersion</key>
-				<string>1.0.1</string>
+				<string>1.0.2</string>
 				<key>CanShowSelectedItemsWhenRun</key>
 				<false/>
 				<key>CanShowWhenRun</key>
@@ -107,7 +107,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>531.500000:832.000000</string>
+				<string>309.500000:554.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -192,7 +192,7 @@ end run</string>
 	<key>workflowMetaData</key>
 	<dict>
 		<key>serviceApplicationBundleID</key>
-		<string>com.apple.dt.Xcode</string>
+		<string></string>
 		<key>serviceApplicationPath</key>
 		<string>/Developer/Applications/Xcode.app</string>
 		<key>serviceInputTypeIdentifier</key>

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>339.2</string>
+	<string>346</string>
 	<key>AMApplicationVersion</key>
-	<string>2.2.4</string>
+	<string>2.3</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -25,7 +25,7 @@
 					</array>
 				</dict>
 				<key>AMActionVersion</key>
-				<string>1.0.1</string>
+				<string>1.0.2</string>
 				<key>AMApplication</key>
 				<array>
 					<string>Automator</string>
@@ -51,12 +51,12 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>tell application "Xcode"	set current_document to last source document	set current_document_path to path of current_document	set raw_source to quoted form of (text of current_document as Unicode text)	set formatted_source to do shell script "echo " &amp; raw_source &amp; " | /usr/local/bin/uncrustify -l OC -q -c ~/.uncrustify.cfg"	set text of current_document to formatted_sourceend tell</string>
+					<string>-- In case of multiple Xcode installs, be sure to use the active oneset current_application_path to path to frontmost application as textusing terms from application "Xcode"	tell application current_application_path		-- Ugly but otherwise we could get a document from the wrong window		set current_document to text document 1 whose name ends with (word -1 of (get name of window 1))		set raw_source to quoted form of (text of current_document as Unicode text)		set formatted_source to do shell script "echo " &amp; raw_source &amp; " | /usr/local/bin/uncrustify -l OC -q -c ~/.uncrustify.cfg"		set text of current_document to formatted_source	end tellend using terms from</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
 				<key>CFBundleVersion</key>
-				<string>1.0.1</string>
+				<string>1.0.2</string>
 				<key>CanShowSelectedItemsWhenRun</key>
 				<false/>
 				<key>CanShowWhenRun</key>
@@ -107,7 +107,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>531.500000:832.000000</string>
+				<string>309.500000:554.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
