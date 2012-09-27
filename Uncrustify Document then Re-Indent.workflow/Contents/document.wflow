@@ -51,7 +51,126 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>-- Config-- These values may need to be changed depending on your locale.set keyCode_upArrow to 126set menu_selectAll to {"Xcode", "Edit", "Select All"}set menu_reindent to {"Xcode", "Editor", "Structure", "Re-Indent"}-- End Configon menu_click(mList)	local appName, topMenu, r		-- Validate our input	if mList's length &lt; 3 then error "Menu list is not long enough"		-- Set these variables for clarity and brevity later on	set {appName, topMenu} to (items 1 through 2 of mList)	set r to (items 3 through (mList's length) of mList)		-- This overly-long line calls the menu_recurse function with	-- two arguments: r, and a reference to the top-level menu	tell application "System Events" to my menu_click_recurse(r, ((process appName)'s ¬		(menu bar 1)'s (menu bar item topMenu)'s (menu topMenu)))end menu_clickon menu_click_recurse(mList, parentObject)	local f, r		-- `f` = first item, `r` = rest of items	set f to item 1 of mList	if mList's length &gt; 1 then set r to (items 2 through (mList's length) of mList)		-- either actually click the menu item, or recurse again	tell application "System Events"		if mList's length is 1 then			click parentObject's menu item f		else			my menu_click_recurse(r, (parentObject's (menu item f)'s (menu f)))		end if	end tellend menu_click_recurseusing terms from application "Xcode"	-- Reliably finds the currently active document in Xcode regardless of	-- windows, tabs, and multiple open projects.	on find_active_document(xcode_application)		global menu_selectAll, keyCode_upArrow				set selection_ranges to {}		set active_document to missing value				-- Select all of the text in the active document.		-- Avoid Cmd+A since the keyboard shortcut can be changed.		menu_click(menu_selectAll)				-- Catalog the selection of each open document.		-- With multiple Xcode windows open, the order of these documents		-- is not dependent on the order of the windows. The first document		-- will often be from a background window.		tell application xcode_application			repeat with this_document in text documents				set end of selection_ranges to (get selection of this_document)			end repeat		end tell				-- The active document text was previously selected with Select All.		-- Now, we use the arrow key to deselect the active document.		tell application "System Events" to keystroke (key code keyCode_upArrow)				-- Find the document whose selection changed. Since that change		-- could have only affected one document, regardless of the Xcode		-- interface configuration we know that it is the active document.		tell application xcode_application			set current_index to 0			repeat with this_document in text documents				set current_index to current_index + 1				set previous_selection to (item current_index of selection_ranges)				set current_selection to (get selection of this_document)								-- Find the selection that changed then stop searching				if previous_selection is not current_selection then					set active_document to this_document					exit repeat				end if			end repeat		end tell				return active_document	end find_active_document		-- In case of multiple Xcode installs, be sure to use the active one	set current_application_path to path to frontmost application as text		-- Xcode 4 does not yet let you get the active document, so we have	-- to work for it.	set active_document to find_active_document(current_application_path)		if active_document is missing value then		-- The caret was elsewhere, such as in the console		display dialog "Please select a source file and try again"			else		-- Otherwise, uncrustify and update the document		tell application current_application_path			set raw_source to quoted form of (text of active_document as Unicode text)			set formatted_source to do shell script "echo " &amp; raw_source &amp; " | /usr/local/bin/uncrustify -l OC -q -c ~/.uncrustify.cfg"			set text of active_document to formatted_source		end tell				-- Select the text		menu_click(menu_selectAll)				-- Apply Xcode's indentation		menu_click(menu_reindent)				-- Deselect the text		tell application "System Events" to keystroke (key code keyCode_upArrow)	end ifend using terms from</string>
+					<string>-- Config
+
+-- These values may need to be changed depending on your locale.
+set keyCode_upArrow to 126
+set menu_selectAll to {"Xcode", "Edit", "Select All"}
+set menu_reindent to {"Xcode", "Editor", "Structure", "Re-Indent"}
+
+-- End Config
+
+on menu_click(mList)
+	local appName, topMenu, r
+	
+	-- Validate our input
+	if mList's length &lt; 3 then error "Menu list is not long enough"
+	
+	-- Set these variables for clarity and brevity later on
+	set {appName, topMenu} to (items 1 through 2 of mList)
+	set r to (items 3 through (mList's length) of mList)
+	
+	-- This overly-long line calls the menu_recurse function with
+	-- two arguments: r, and a reference to the top-level menu
+	tell application "System Events" to my menu_click_recurse(r, ((process appName)'s ¬
+		(menu bar 1)'s (menu bar item topMenu)'s (menu topMenu)))
+end menu_click
+
+on menu_click_recurse(mList, parentObject)
+	local f, r
+	
+	-- `f` = first item, `r` = rest of items
+	set f to item 1 of mList
+	if mList's length &gt; 1 then set r to (items 2 through (mList's length) of mList)
+	
+	-- either actually click the menu item, or recurse again
+	tell application "System Events"
+		if mList's length is 1 then
+			click parentObject's menu item f
+		else
+			my menu_click_recurse(r, (parentObject's (menu item f)'s (menu f)))
+		end if
+	end tell
+end menu_click_recurse
+
+using terms from application "Xcode"
+	-- Reliably finds the currently active document in Xcode regardless of
+	-- windows, tabs, and multiple open projects.
+	on find_active_document(xcode_application)
+		global menu_selectAll, keyCode_upArrow
+		
+		set selection_ranges to {}
+		set active_document to missing value
+		
+		-- Select all of the text in the active document.
+		-- Avoid Cmd+A since the keyboard shortcut can be changed.
+		menu_click(menu_selectAll)
+		
+		-- Catalog the selection of each open document.
+		-- With multiple Xcode windows open, the order of these documents
+		-- is not dependent on the order of the windows. The first document
+		-- will often be from a background window.
+		tell application xcode_application
+			repeat with this_document in text documents
+				set end of selection_ranges to (get selection of this_document)
+			end repeat
+		end tell
+		
+		-- The active document text was previously selected with Select All.
+		-- Now, we use the arrow key to deselect the active document.
+		tell application "System Events" to keystroke (key code keyCode_upArrow)
+		
+		-- Find the document whose selection changed. Since that change
+		-- could have only affected one document, regardless of the Xcode
+		-- interface configuration we know that it is the active document.
+		tell application xcode_application
+			set current_index to 0
+			repeat with this_document in text documents
+				set current_index to current_index + 1
+				set previous_selection to (item current_index of selection_ranges)
+				set current_selection to (get selection of this_document)
+				
+				-- Find the selection that changed then stop searching
+				if previous_selection is not current_selection then
+					set active_document to this_document
+					exit repeat
+				end if
+			end repeat
+		end tell
+		
+		return active_document
+	end find_active_document
+	
+	-- In case of multiple Xcode installs, be sure to use the active one
+	set current_application_path to path to frontmost application as text
+	
+	-- Xcode 4 does not yet let you get the active document, so we have
+	-- to work for it.
+	set active_document to find_active_document(current_application_path)
+	
+	if active_document is missing value then
+		-- The caret was elsewhere, such as in the console
+		display dialog "Please select a source file and try again"
+		
+	else
+		-- Otherwise, uncrustify and update the document
+		tell application current_application_path
+			set raw_source to quoted form of (text of active_document as Unicode text)
+			set formatted_source to do shell script "/usr/local/bin/uncrustify -l OC -q -c ~/.uncrustify.cfg <<< " &amp; raw_source
+			set text of active_document to formatted_source
+		end tell
+		
+		-- Select the text
+		menu_click(menu_selectAll)
+		
+		-- Apply Xcode's indentation
+		menu_click(menu_reindent)
+		
+		-- Deselect the text
+		tell application "System Events" to keystroke (key code keyCode_upArrow)
+	end if
+end using terms from
+</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
