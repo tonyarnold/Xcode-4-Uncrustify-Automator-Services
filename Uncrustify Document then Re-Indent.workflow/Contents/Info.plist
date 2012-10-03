@@ -12,11 +12,6 @@
 			</dict>
 			<key>NSMessage</key>
 			<string>runWorkflowAsService</string>
-			<key>NSRequiredContext</key>
-			<dict>
-				<key>NSApplicationIdentifier</key>
-				<string>com.apple.dt.Xcode</string>
-			</dict>
 		</dict>
 	</array>
 </dict>
